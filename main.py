@@ -59,33 +59,6 @@ while True:
     if result < min_moves:
       print(result)
       exit
-     
-     
-
-
-
-
-#Enter how many times to play game
-num_user_moves_cumulative_sum = 0
-for i in range(10):
-  num_user_moves_cumulative_sum += play_game()
-f.write("Trailer " + str(num_user_moves_cumulative_sum) + " total move over " + str(i+1) + " runs. " + "End time: " + str(datetime.datetime.now()))  
-f.close()
-
-#Import csv file using Pandas library and create Dataframe object (ignoring header and trailer records)
-df = pd.read_csv(filename, names= ['# of moves','Time elapsed (ms)'], skiprows=1, skipfooter= 1, engine='python')
-
-#Define linear regression using numpy library and insert into dataframe object
-d = np.polyfit(df['# of moves'],df['Time elapsed (ms)'],1)
-fpoly1d= np.poly1d(d)
-df.insert(0,'Linear regression', fpoly1d(df['# of moves']))
-
-#Print entire Dataframe object
-print(df.to_string())
-
-#Create scatterplot as subplot (ax), and plot linear regression 
-ax = df.plot(kind = 'scatter', x = '# of moves', y='Time elapsed (ms)')
-df.plot(x='# of moves', y='Linear regression',color='Red',ax=ax)
 
 #Display diagram
 plt.show()
